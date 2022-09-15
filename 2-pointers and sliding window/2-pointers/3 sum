@@ -1,0 +1,37 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+      int n = nums.length;
+      List<List<Integer>> ans = new ArrayList<>(); //Array list interface a 2 d list
+        Arrays.sort(nums);//sort the elements
+        for(int i=0;i<n;i++){
+            int target = -nums[i]; //A+B+C =0 => A+B = -C
+            int j = i+1;
+            int k = n-1;
+            while(j<k){
+                int sum = nums[j] + nums[k]; // sum of j and k index
+                if(sum<target)
+                    j++;
+                else if(sum>target)  // binary search concept
+                    k--;
+                else{      // if sum=target then we have to add in the list
+                    List<Integer> l = new ArrayList<>();
+                    l.add(nums[i]);   // first we add i, j ,k int l list
+                    l.add(nums[j]);
+                    l.add(nums[k]);
+                    ans.add(l);   // whole l ist add in ans
+                    while(j<k && nums[j]==nums[j+1]){
+                        j++;
+                    }
+                    j++;
+                    while(j<k &&nums[k]==nums[k-1])k--;
+                    k--;
+                    
+                }
+            }
+            while(i<n-2 &&nums[i]==nums[i+1]){
+                i++;
+            }
+        }
+        return ans;
+    }
+}
