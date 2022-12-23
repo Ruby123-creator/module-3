@@ -1,0 +1,42 @@
+
+import java.util.*;
+public class Main
+
+{
+    public static int helper(int n ,int mid){
+        int ans =1;
+        for(int i=0;i<n;i++){
+            ans *= mid;
+        }
+        return ans;
+    }
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();//nth value
+		int m = sc.nextInt(); //number for which you find nth root 
+		
+		
+		//1st method
+// 		int count =0;
+// 		while(m>=n){
+// 		    m = m/n;
+// 		    count++;
+// 		}
+
+
+        //using binary search
+        int start =1;   //sorted array to apply binary search 1 to m
+        int end =m;
+        while(start<=end){
+            int mid = (start+end)/2;
+            if(helper(n,mid)<m){
+                start =mid+1;
+            }
+            else{
+                end = mid-1;
+            }
+        }
+		System.out.print(start);
+	}
+}
