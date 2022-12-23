@@ -1,0 +1,61 @@
+
+import java.util.*;
+public class Main
+
+{
+    public static boolean helper(int possibleweight ,int weight[] ,int days){
+        int counteddays =1;
+        int sum =0;
+        
+        for(int i=0;i<weight.length;i++){
+            //here monotonic relation is in between number of days and ship capacity
+            // if days increases then the ship capacity decreases in a fixed no. of packages
+          if(sum+weight[i]<=possibleweight){
+              sum += weight[i];
+          }
+          else{
+              counteddays++;
+              sum = weight[i];
+          }
+            
+        }
+        if(counteddays<=days)return true;
+        return false;
+    }
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();//number of packages
+	    int weights[] = new int[n];
+	    for(int i=0;i<n;i++){
+	        weights[i] = sc.nextInt();
+	        
+	    }
+	    int days = sc.nextInt();//number of days to ship all the weight of packages
+	    //find the minimum weight capacity to ship all the packages within given days
+	    //find search space
+	    //minimum capacity is the maximum of all weights(n=days)
+	    int start = Integer.MIN_VALUE;
+      //maximum capacity is the sum of all the weights(day=1)
+ 
+        int end = 0;
+        for(int i=0;i<n;i++){
+            start = Math.max(start,weights[i]);
+            end += weights[i];
+        }
+	    int ans =0;
+	    while(start<=end){
+	        int mid = start +(end-start)/2;
+	        if(helper(mid,weights,days)){
+	            ans = mid;
+	            end = mid-1;  //beacuse we find the minimum capacity 
+	        }
+	        else{
+	            start = mid+1;
+	           
+	        }
+	    }
+	    System.out.print(ans);
+	    
+	}
+}
