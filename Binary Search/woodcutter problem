@@ -1,0 +1,56 @@
+
+import java.util.*;
+public class Main
+
+{
+    public static boolean helper(int possibleheight ,int height[] ,int wood){
+        int collectedwood =0;
+        
+        
+        for(int i=0;i<height.length;i++){
+            //here monotonic relation is in between requiredwood and height of the tree
+            // if requiredwood increases then height of tree decreases for cutting in a fixed no. trees
+            if((height[i]-possibleheight)>0){
+          collectedwood += height[i]-possibleheight;
+            }  
+        }
+        if(collectedwood>=wood)return true;
+        return false;
+    }
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();//number of trees
+	    int height[] = new int[n];
+	    for(int i=0;i<n;i++){
+	        height[i] = sc.nextInt();
+	        
+	    }
+	    int requiredwood = sc.nextInt();
+	    //find the maximum height of the tree
+	   // minimum height to cut the tree is 0
+	    //find search space
+	  
+	    int start = 0;
+      //maximum height is the maximum of all the height of trees
+ 
+        int end = 0;
+        for(int i=0;i<n;i++){
+            end = Math.max(end,height[i]);
+        }
+	    int ans =0;
+	    while(start<=end){
+	        int mid = start +(end-start)/2;
+	        if(helper(mid,height,requiredwood)){
+	            ans = mid;
+	            start = mid+1;  //beacuse we find the maximum height
+	        }
+	        else{
+	            end = mid-1;
+	           
+	        }
+	    }
+	    System.out.print(ans);
+	    
+	}
+}
