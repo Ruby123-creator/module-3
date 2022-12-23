@@ -1,0 +1,62 @@
+
+import java.util.*;
+public class Main
+
+{
+    public static boolean helper(int possibletime ,int board[] ,int painters){
+        int requiredpainter =1;
+        int sum =0;
+        
+        for(int i=0;i<board.length;i++){
+            //here monotonic relation is in between number of painters and requiredtime to paint
+            // if painters increases then requiredtime decreases to paint all the boards
+            if((sum+board[i]<=possibletime)){
+          sum += board[i];
+            } 
+            else{
+                requiredpainter++;
+                sum = board[i];
+                if(requiredpainter>painters)return false;
+            }
+        }
+        return true;
+        
+    }
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();//number of board
+	    int boardsize[] = new int[n];
+	    for(int i=0;i<n;i++){
+	       boardsize[i] = sc.nextInt();
+	        
+	    }
+	    int painters = sc.nextInt();
+	    //find the minimum time to paint all the board
+	   // minimum time to paint the board is maximum size of board of an array(if painters>=board)
+	    //find search space
+	  
+	    int start = 0;
+      //maximum time is the sum of all boardsize(if painter=1)
+ 
+        int end = 0;
+        for(int i=0;i<n;i++){
+            start = Math.max(start,boardsize[i]);
+            end += boardsize[i];
+        }
+	    int ans =0;
+	    while(start<=end){
+	        int mid = start +(end-start)/2;
+	        if(helper(mid,boardsize,painters)){
+	            ans = mid;
+	            end = mid-1;  //beacuse we find the minimum time
+	        }
+	        else{
+	            start = mid+1;
+	           
+	        }
+	    }
+	    System.out.print(ans);
+	    
+	}
+}
