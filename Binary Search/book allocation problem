@@ -1,0 +1,55 @@
+
+import java.util.*;
+public class Main
+
+{
+    public static boolean helper(int possiblepages ,int pages[] ,int student){
+        int countstudent =1;
+        int sum =0;
+        for(int i=0;i<pages.length;i++){
+            if(sum+pages[i]<=possiblepages){    //here monotonic relation is in between number of students and number of pages
+                                                //given to the student if student increase then book allocation each student decreases
+                sum += pages[i];
+            }else{
+                countstudent++;
+                sum = pages[i];
+            }
+            if(countstudent>student){
+                return false;
+            }
+        }
+        return true;
+    }
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();//number of books
+	    int pages[] = new int[n];
+	    for(int i=0;i<n;i++){
+	        pages[i] = sc.nextInt();
+	        
+	    }
+	    int student = sc.nextInt();//number of student
+	    //find search space
+	    //we find the minimum of an array beacuse if student==n then each student have atleast one book
+	    int start = Integer.MAX_VALUE;
+	    int end = 0;  //we find the sum of all the pages if student is one then all the books should be allocated to that one student only
+	    for(int i=0;i<n;i++){
+	        start = Math.min(start ,pages[i]);
+	        end += pages[i];
+	    }
+	    int ans =0;
+	    while(start<end){
+	        int mid = start +(end-start)/2;
+	        if(helper(mid,pages,student)){
+	            ans = mid;       //if countedstudent is less than or equal to given student
+	            end = mid-1;   //beacuse we find the minimum of all maximum pages
+	        }
+	        else{
+	            start =mid+1;
+	        }
+	    }
+	    System.out.print(ans);
+	    
+	}
+}
