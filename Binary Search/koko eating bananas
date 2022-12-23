@@ -1,0 +1,60 @@
+
+import java.util.*;
+public class Main
+
+{
+    public static boolean helper(int possiblespeed ,int piles[] ,int hours){
+        int countedhours =0;
+        
+        
+        for(int i=0;i<piles.length;i++){
+            //here monotonic relation is in between number returning hours and speed of kokos eating
+            // if returninghours increases then speed of kokos eating decreases in a fixed no. of piles
+          if(piles[i]%possiblespeed==0){
+              countedhours += piles[i]/possiblespeed;
+          }
+          else{
+              countedhours += (piles[i]/possiblespeed)+1;
+          }
+            
+        }
+        if(countedhours<=hours)return true;
+        return false;
+    }
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();//number of piles
+	    int bananas[] = new int[n];
+	    for(int i=0;i<n;i++){
+	        bananas[i] = sc.nextInt();
+	        
+	    }
+	    int returningtime = sc.nextInt();
+	    //find the minimum speed of koko's to eat all the bananas
+	   // returningtime should not be less than number of piles beacuse he is not allowed to move other pile during this hour
+	    //find search space
+	    //minimum value is 1 beacuse koko wants to eat as much as slow(1banana/hr)
+	    int start = 1;
+      //maximum speed is the maximum of all the piles beacuse if he eat that maximum pile in that speed then he can able to eat all the lesser piles bananas in that speed
+ 
+        int end = 0;
+        for(int i=0;i<n;i++){
+            end = Math.max(end,bananas[i]);
+        }
+	    int ans =0;
+	    while(start<=end){
+	        int mid = start +(end-start)/2;
+	        if(helper(mid,bananas,returningtime)){
+	            ans = mid;
+	            end = mid-1;  //beacuse we find the minimum speed 
+	        }
+	        else{
+	            start = mid+1;
+	           
+	        }
+	    }
+	    System.out.print(ans);
+	    
+	}
+}
