@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Main
+{
+
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();  
+		int arr[] = new int[n];
+		int freq=0;
+		for(int i=0;i<n;i++){             
+		        arr[i]= sc.nextInt();            // 1 2 3 4 it means 2 comes 1 time and 4 comes 3 times
+		        if(i%2==0){
+		        freq += arr[i];                 //make an array of size of  frequency sum
+		        }
+		  }
+	   int ans[] = new int[freq];
+	   int k=0;
+	   for(int i=0;i<n;i+=2){             //start from 0 and increment by 2
+	       while(arr[i]>0){
+	           ans[k]=arr[i+1];          // fill the ans array until the element of ith index becomes 0
+	           k++;
+	           arr[i]--;
+	       }
+	       
+	   }
+	   for(int i=0;i<freq;i++){
+	       System.out.print(ans[i]+" ");
+	   }
+	}
+}
