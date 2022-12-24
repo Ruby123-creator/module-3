@@ -1,0 +1,41 @@
+import java.util.*;
+class pair{
+    int start;
+    int end;
+    pair(int start ,int end){
+        this.start = start;
+        this.end = end;
+    }
+}
+public class Main
+{
+
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();  //number of meetings
+		int st_time[] = new int[n];
+		for(int i=0;i<n;i++){             
+		        st_time[i]= sc.nextInt();
+		  }
+	   int end_time[] = new int[n];
+		for(int i=0;i<n;i++){             
+		        end_time[i]= sc.nextInt();
+		  }                                                               // 1 3 0 5 8 5
+        pair meetings[] = new pair[n];                                    // 2 4 5 7 9 9
+        for(int i=0;i<n;i++){
+            meetings[i] = new pair(st_time[i],end_time[i]);        
+                                           // no. of meetings possible       1 2   3 4  in a single room
+        }
+        Arrays.sort(meetings ,(a,b)->a.end-b.end);//in this ending time gets sorted
+        int j=0;                                  
+        int count =1;
+        for(int i=1;i<n;i++){
+            if(meetings[i].start>meetings[j].end){   //if previous ending time is less than upcoming starting meeting time then 
+                count++;                             // it is possible to held a meeting in a single room
+                j=i;
+            }
+        }
+        System.out.print(count);
+	}
+}
