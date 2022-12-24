@@ -1,0 +1,54 @@
+import java.util.*;
+
+public class Main
+{
+
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();  
+		int arr[] = new int[n];
+		for(int i=0;i<n;i++){             
+		        arr[i]= sc.nextInt();           
+		        
+		  }
+	   //find the majority element
+	   //method-1
+	   
+	   
+	   //Arrays.sort(arr);
+	   //System.out.print(arr[n/2]);
+	   
+	   //using HashMap  Mehtod-2
+	   //HashMap<Integer,Integer> map = new HashMap<>();
+	   //for(int i=0;i<n;i++){
+	   //    map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+	   //}
+	   //for(int x:map.keySet()){
+	   //    if(map.get(x)>=n/2){
+	   //        System.out.print(x);
+	   //        return;
+	   //    }
+	   //}
+	   
+	   
+	   //using moores voting Algorithm
+	   int count =1;
+	   int maj=arr[0];
+	   for(int i=1;i<n;i++){
+	       if(arr[i]==maj){
+	           count++;
+	           
+	       }
+	       else if(count==0){
+	           count=1;
+	           maj =arr[i];
+	           
+	       }
+	       else{
+	           count--;
+	       }
+	   }
+	   System.out.print(maj);
+	}
+}
