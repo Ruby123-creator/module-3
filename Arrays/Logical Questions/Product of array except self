@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class Main
+{
+
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();  
+		int arr[] = new int[n];
+		for(int i=0;i<n;i++){             
+		        arr[i]= sc.nextInt();           
+		        
+		  }
+		  //Brute force Approach O(n^2)
+		  int ans[] = new int[n];
+	   //for(int i=0;i<n;i++){
+	   //    int product=1;
+	   //    for(int j=0;j<n;j++){
+	   //        if(i!=j){
+	   //            product *= arr[j];
+	   //        }
+	   //    }
+	   //    ans[i] = product;
+	   //    System.out.print(ans[i]+" ");
+	   //}
+	   
+	   
+	   //optimised method
+	   int prod=1;
+	   for(int i=0;i<n;i++){          //arr   1   2    3    4
+	       prod *=  arr[i];           //ans   1   2    6    24
+	       ans[i] = prod;
+	   }
+	    prod=1;                      //      24   24    12   4     1                          
+	   for(int i=n-1;i>0;i--){
+	       ans[i] = ans[i-1]*prod; //       24    12     8     6
+	       prod *= arr[i];
+	   }
+	   ans[0] =prod;
+	   for(int i=0;i<n;i++){
+	       System.out.print(ans[i]+" ");
+	   }
+	}
+}
