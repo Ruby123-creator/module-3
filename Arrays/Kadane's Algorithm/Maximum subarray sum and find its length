@@ -29,5 +29,8 @@ public class Main
 	}
 	System.out.println(max);
 	System.out.print(end-st+1);
+	
+	
+	//Brute force approach is to find the sum of all subarray and find its maximum value its O(n^2)
 	}
 }
