@@ -1,0 +1,44 @@
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	//	System.out.println("Hello World");
+	Scanner sc = new Scanner(System.in);
+	int n = sc.nextInt();
+	int nums[] = new int[n];
+	for(int i=0;i<n;i++){          
+	    nums[i] = sc.nextInt();        
+	}
+     String arr[] = new String[n];
+     for(int i=0;i<n;i++){                   //  0    1     2     3     4
+         arr[i] = String.valueOf(nums[i]);   // "3"  "30"  "34"  "5"   "9"
+     }                                  //   m   0  
+                                        //   s1 = "330"    s2 ="303"  they arranged correctly because s1>s2 ( m=0)
+    //  for(int i=0;i<n-1;i++){            //   s1 =  "334"   s2 ="343"  they are not arranged correctly so m=2
+    //      int m=i;                       //   s1 = "345"    s2 ="453"   again change m=3
+    //      for(int j=i+1;j<n;j++){        //   s1 = "59"     s2 ="95"    again m=4  end of j loop
+    //          String s1 = arr[m]+arr[j]; // now swap m with i because the value at m is the greatest of all the numbers
+    //          String s2 = arr[j]+arr[m];
+    //          if(s2.compareTo(s1)>0){
+    //          m=j;
+    //          System.out.println(m);
+    //      }
+    //      }
+         
+    //      String temp = arr[m];  // swap the ith element with m
+    //  arr[m] = arr[i];
+    //  arr[i] = temp;
+    //  }
+     //optimised method using comparators
+     Arrays.sort(arr ,(s1 ,s2)->(s2+s1).compareTo(s1+s2));
+     String ret ="";
+     for(int i=0;i<n;i++){
+         ret += arr[i];
+     }
+     System.out.print(ret);
+     
+     
+	}
+	
+}
