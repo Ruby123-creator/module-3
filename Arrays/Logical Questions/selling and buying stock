@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();               //selling and buying array
+		int arr[] = new int[n];             // 100   120  260   320    40    120   200  350
+		for(int i=0;i<n;i++){             //    0     1    2     3      4     5     6    7
+		    arr[i]=sc.nextInt();         //   buy   --   --    sell   buy   --    --   sell
+		}
+		ArrayList<Integer> ans = new ArrayList<>();                  //make an arraylist to store the all buying and selling index
+		int j=0;                                                   // first element should be have to buy 
+		int max =0;                                            // to find the maximum profit
+		for(int i=1;i<=n;i++){  // we check from i=1 to i=n 
+		    if(i==n||arr[i]<arr[i-1]){                                        // if we got an index where prevoius element is greater than current than sell on previos day
+		        if(arr[i-1]-arr[j]>0){                                         // i==n should we write first else when it firstly checks arr[n] then it shows error
+		            max = Math.max(max ,arr[i-1]-arr[j]);                //find the mmax profit
+		          
+		            ans.add(j);                                       // add j and i-1 index
+		            ans.add(i-1);
+		            
+		            
+		        }
+		        j=i;
+		    }
+		}
+		
+		System.out.println(ans);
+		System.out.print(max);
+	}
+}
