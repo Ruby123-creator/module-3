@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();               
+		int arr[] = new int[n];            
+		for(int i=0;i<n;i++){         
+		    arr[i]=sc.nextInt();         //       3     -1      4    
+		}
+		// Method-1                     // prod   3      -3    -12
+// 		int prod=1;
+// 		int max = Integer.MIN_VALUE;    // max    3      3     3    
+// 		for(int i=0;i<n;i++){
+// 		    prod *= arr[i];
+// 		    max = Math.max(max ,prod);  // but here maximumsubarray is 4
+// 		    if(prod==0){                // if prod=0 then there is no means to take that array so again initialize prod=1
+// 		        prod =1;
+// 		    }
+// 		}
+// 		prod=1;
+// 		for(int i==n-1;i>=0;i--){        //prod  4     -4     -12    
+// 		    prod *=arr[i];
+// 		    max = Math.max(max ,prod);   //max   4      4       4
+// 		    if(prod==0){
+// 		        prod=1;
+// 		    }
+// 		}
+// 		System.out.print(max);
+
+
+    //2-Method
+    int global_max = arr[0];  // this method takes care of minimum and maximum product and at last max_global
+    int max = arr[0];
+    int min = arr[0];
+    for(int i=1;i<n;i++){
+        int temp = Math.max(arr[i] ,Math.max(arr[i]*max ,arr[i]*min));
+        min = Math.min(arr[i],Math.min(arr[i]*max ,arr[i]*min));
+        max = temp;
+        global_max = Math.max(global_max ,max);    //arr             3    -1     4     -7
+    }                                              //temp     min        max      global_max   
+    System.out.print(global_max);           //i=0             3          3           3    
+	                                        //i=1     -1       -3         -1           3
+	}                                       //i=2     4        -12         4           4 
+}                                         //i=3     84       -28         84          84
+                                         
