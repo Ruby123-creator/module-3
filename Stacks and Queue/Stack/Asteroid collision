@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();               
+		int arr[] = new int[n];            
+		for(int i=0;i<n;i++){         
+		    arr[i]=sc.nextInt();        //      5     10   -5
+		    
+		}
+     Stack<Integer> st = new Stack<>();	// st   5     10     	
+		int i=0;
+		while(i<n){
+		    int curr = arr[i];
+		    if(!st.empty()&&st.peek()>0&&curr<0){     // peek value is positive and curr value is negative
+		        if(Math.abs(curr)>st.peek()){         // -->(+)     <--(-)(collide)
+		            st.pop();                         //if both values are same then both collide
+		        }                                    // if postive value is smaller then pop the element
+		        else if(Math.abs(curr)<st.peek()){   // if negative value is smaller then there is no need to add
+		            i++;
+		        }
+		        else{                              //-->     --> || <--   <--|| <--   -->(just add no chance to collide)
+		            st.pop();          
+		            i++;
+		        }
+		    }
+		    else{
+		        st.push(curr);
+		        i++;
+		    }
+		}
+		ArrayList<Integer> ans = new ArrayList<>();
+		for(int j=0;j<=st.size();j++){
+		    ans.add(0,st.pop());
+		}
+		System.out.print(ans);
+
+	}
+}
