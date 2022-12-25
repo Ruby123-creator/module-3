@@ -1,0 +1,59 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		String s1 = sc.next();
+		String s2 = sc.next();
+		if(helper(s1).equals(helper(s2))){
+		    System.out.print("true");
+		}
+       else{
+           System.out.print("false");
+       }
+	}
+	public static String helper(String s){
+	    
+	  //Method-1 moores voting algorithm
+	  int i = s.length()-1;         //s1 = geee#e#ks
+	  int count =0;              //count    0      1    0    1   0    
+	  String p ="";              // p       sk     sk  sk    sk  sk    skeeg
+	  while(i>=0){
+	      char ch = s.charAt(i);    //  s2 =gee##eeks
+	      if(ch=='#'){            //count   0      1       2      1     0    
+	          count++;            //  p    skee    skee   skee   skee   skee   skeeg   
+	      }
+	      else if(count>0){
+	          count--;
+	      }
+	      else{
+	          p += ch; 
+	      }
+	      i--;
+	  }
+	  
+	  return p;
+	  
+	  //Method-2 stack method
+	   // Stack<Character> st = new Stack<>();
+	    
+	   // int i=0;
+	   // while(i<s.length()){
+	   //     char ch = s.charAt(i);
+	   //     if(!st.empty()&&ch=='#'){
+	   //         st.pop();
+	   //     }
+	   //     else{
+	   //         st.push(ch);
+	   //     }
+	   //     i++;
+	   // }
+	   // StringBuilder p = new StringBuilder();
+	   // while(!st.empty()){
+	   //     p.append(st.pop());
+	   // }
+	   // return p.toString();
+	}
+}
