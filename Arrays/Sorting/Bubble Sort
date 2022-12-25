@@ -1,0 +1,31 @@
+// BUBBLE SORT( STABLE AND ADAPTIVE)
+
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n =sc.nextInt();
+		int a[] = new int[n];
+		for(int i=0;i<n;i++){
+		    a[i] =sc.nextInt();
+		}
+		
+		for(int i=0;i<n-1;i++){               // i loop starts from 0 to n-1 beacuse we need n-1 iteration to compare the values
+		    boolean flag = true;            
+		    for(int j=0;j<n-1-i;j++){        //j loop is used to compare the values and each time the iteration decrease by one beacuse the larger values shifted it's right position 
+		        if(a[j]>a[j+1]){            // we compare two consecutive values if current element is greater than next element than swap the values
+		             flag = false;          
+		            int temp = a[j];
+		            a[j] =a[j+1];
+		            a[j+1] =a[j];
+		        }
+		    }
+		    if(flag==true){      // if in j loop if flag doesn't becomes false than it means all the values are sorted and break the i loop means now all the elements are sorted
+		        break;
+		    }
+		}
+		System.out.print(Arrays.toString(a));
+	}
+}
