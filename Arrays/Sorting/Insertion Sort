@@ -1,0 +1,27 @@
+// INSERTION SORT(STABLE AND ADAPTIVE)
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n =sc.nextInt();
+		int a[] = new int[n];                               // swaping of elements occur until j is greator than or eqaul to zero and current element is greater tha next element
+		for(int i=0;i<n;i++){
+		    a[i] =sc.nextInt();                           // arr     3     9     5     4    2    10
+		}                                                //index     0     1     2     3    4     5
+		                                                //i=1  j=0   there is no need to swap      
+		for(int i=1;i<n-1;i++){                        //i=2   j=1   9 and 5 swaps     3    5    9    4   2   10
+		    int j=i-1;                                 //       j=0   no swap
+		    while(j>=0 && a[j]>a[j+1]){                //i=3    j=2   9 and 4 swap     3    5     4   9   2   10
+		        int temp = a[j];                     //         j=1   5 and 4 swap     3    4     5   9   2   10
+		        a[j] = a[j+1];                       //         j=0   no swap
+		        a[j+1] = a[j];                       // i=4     j=3   9 and 2 swap     3    4     5   2   9   10
+		        j--;                                 //         j=2   5 and 2 swap     3    4     2   5   9   10
+		    }                                        //         j=1   4 and 2 swap     3    2     4   5   9   10
+		                                             //         j=0   3 and 2 swap     2    3     4   5   9   10
+		    
+		}
+		System.out.print(Arrays.toString(a));
+	}
+}
