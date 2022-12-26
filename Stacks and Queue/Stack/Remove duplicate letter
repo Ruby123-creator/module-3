@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		String s = sc.next();                    // s  =  cbacdcbc
+		int n =s.length();                      //freq =  a   b   c    d
+        int freq[] = new int[26];               //        1   2   4    1
+       for(int i=0;i<n;i++){                    //        0   1   2    3
+           freq[s.charAt(i)-'a']++;         //visited     F   F    F   F
+       }                                    // char(c)    freq         stack            visited      
+       boolean visited[] = new boolean[26]; //   c         c=3          c                 c= T
+       Stack<Character> st = new Stack<>(); //   b         b=1      c>b&&freq c>0  b      c=F  b =T
+       for(int i=0;i<n;i++){                //   a         a=0     b>a&&freq b>0   a      b=F  a =T
+         char c = s.charAt(i);              //   c         c=2    a!>c    a  c           c =T
+          freq[c-'a']--;                    //   d         d=0    c!>d    a  c  d        d=T
+        if(visited[c-'a']) {                //   c         c=1    c is already true so just skip the iteration
+            continue;                       //   b         b=0    d>b but freq b=0   a  c  d  b
+        }                                   //   c         c=0   c is already true skip the iteration
+        while(!st.isEmpty() && st.peek() > c && freq[st.peek()-'a'] > 0) {
+            visited[st.peek()-'a'] = false;
+            st.pop();
+        }
+        st.push(c);
+        visited[c-'a'] = true;
+    }
+       StringBuilder p = new StringBuilder();
+       for(char x:st){
+           p.append(x);
+       }
+     System.out.print(p);
+	}
+}
