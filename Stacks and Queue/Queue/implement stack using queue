@@ -1,1 +1,58 @@
-................
+
+import java.util.*;
+ class Stack     //Stack Class
+{
+	Queue<Integer> q1 = new LinkedList<>();//stacks follws last in first out whereas queue follows first in first out 
+
+	Queue<Integer> q2 = new LinkedList<>();
+
+	public void push(int x) {                                                           //q2:add  1 
+       q2.offer(x);                                                                  // q1      1
+        while(!q1.isEmpty()){                                                        // q2:add  2
+            q2.add(q1.poll());                                                       // q2      2  1
+        }                                                                            // q1      2  1
+        while(!q2.isEmpty()){                                                        // q2:add  3
+            q1.add(q2.poll());                                                       // q2      3  2  1
+        }                                                                            // q1      3  2  1
+                                                                                     //pop      3
+    }                                                                            //pop||peek    2
+                                                                                    //q2:add    4
+    public int pop() {                                                               // q2      4   1         
+        if(q1.isEmpty()&&q2.isEmpty())return -1;                                     //q1       4    1
+                                                                                     //q2:add   6
+        return q1.poll();                                                            //   q2    6   4   1
+    }                                                                                //   q1    6   4   1
+                                                                                   //peek||pop  6    
+     public int peek() { 
+        if(q1.isEmpty()&&q2.isEmpty())return -1; 
+       return q1.peek();                
+    }                            
+    public boolean empty() {   
+        return q1.isEmpty() && q2.isEmpty();
+    }
+}
+class Main{
+public static void main(String[] args)
+{
+	Stack s = new Stack();
+	s.push(1);
+	s.push(2);
+	s.push(3);
+
+	System.out.println(s.pop());
+	System.out.println(s.peek());
+	System.out.println(s.pop());
+	s.push(4);
+	s.push(6);
+	System.out.println(s.pop());
+	System.out.println(s.peek());
+	System.out.println(s.pop());
+	System.out.println(s.peek());
+	System.out.println(s.pop());
+	System.out.println(s.pop());
+}
+}
+
+
+
+
