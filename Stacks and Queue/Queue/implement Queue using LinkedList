@@ -1,0 +1,73 @@
+import java.util.*;
+//class Node creation
+class Node{
+    int data;
+   Node next;
+   Node(int data){
+       this.data = data;
+       this.next = null;
+   }
+   
+}
+//queue class create
+class Queue{
+    Node head;
+    public void add(int data){
+      Node newnode = new Node(data);   // we add the elements at tail
+      if(head==null){
+          head =newnode;
+          return;
+      }
+      Node curr = head;
+      while(curr.next!=null){
+          curr = curr.next;
+      }
+      curr.next = newnode;
+      return;
+    }
+    public int poll(){                   // we delete the elements from head
+        if(head==null)return -1;
+        int top = head.data;
+        head = head.next;
+        return top;
+    }
+    public int peek(){                    // we peek the element from head
+        if(head==null)return -1;
+        return head.data;
+    }
+    public void display(){
+        Node curr = head;
+        while(curr!=null){
+            System.out.print(curr.data +" ");
+            curr = curr.next;
+        }
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		 Queue obj
+            = new Queue();
+        obj.add(11);
+        obj.add(22);
+        obj.add(33);
+        obj.add(44);
+ 
+        
+       obj.display();
+        System.out.printf("\nTop element is %d\n",
+                          obj.peek());
+ 
+        
+        obj.poll();
+        obj.poll();
+ 
+
+        obj.display();
+ 
+        System.out.printf("\nTop element is %d\n",
+                          obj.peek());
+	}
+}
