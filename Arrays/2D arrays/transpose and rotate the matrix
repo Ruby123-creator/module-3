@@ -1,0 +1,54 @@
+ import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();                                     //  3
+		int a[][] = new int[n][n];                               //   1 2 3
+		for(int i=0;i<n;i++){                                    //   4 5 6
+		    for(int j=0;j<n;j++){                                //   7 8 9
+		        a[i][j]=sc.nextInt();
+		    }
+		}
+		//extra space
+// 		for(int i=0;i<n;i++){
+// 		    for(int j=0;j<n;j++){
+// 		        System.out.print(a[j][i] + " ");
+// 		    }
+// 		    System.out.println();
+// 		}
+        
+        
+        // for transposing the matrix
+        // by using swapping Method(no extra space is required)           //  1 4 7
+         for(int i=0;i<n;i++){                                             //  2 5 8 
+             for(int j=i+1;j<n;j++){                                       //  3 6 9
+                 
+                 int temp = a[i][j];
+                 a[i][j] = a[j][i];
+                 a[j][i] =temp; 
+                 
+             }
+         }
+         
+        // ROTATE A MATIRX BY 90 DEGREE CLOCKWISE
+          for(int i=0;i<n;i++){
+         int start =0;
+         int end = n-1;
+         while(start<end){
+             int temp =a[i][start];  //coulmn changes
+             a[i][start]=a[i][end];
+             a[i][end] =temp;
+             start++;
+             end--;
+         }
+    }
+         for(int  i=0;i<n;i++){
+             for(int j=0;j<n;j++){                                            // 7 4 1
+                 System.out.print(a[i][j] + " ");                            //  8 5 2
+             }                                                               //  9 6 3
+                      System.out.println();
+         }
+
+	}
+}
