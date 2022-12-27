@@ -1,0 +1,70 @@
+import java.util.*;
+//class Node creation
+class Node{
+    int data;
+   Node next;
+   Node(int data){
+       this.data = data;
+       this.next = null;
+   }
+   
+}
+//stack class create
+class Stack{
+    Node head;
+    public void push(int data){
+      Node newnode = new Node(data);   // we add the elements at head
+      if(head==null){
+          head =newnode;
+          return;
+      }
+      newnode.next = head;
+      head = newnode;
+      
+    }
+    public int pop(){                   // we delete the elements from head
+        if(head==null)return -1;
+        int top = head.data;
+        head = head.next;
+        return top;
+    }
+    public int peek(){                    // we peek the element from head
+        if(head==null)return -1;
+        return head.data;
+    }
+    public void display(){
+        Node curr = head;
+        while(curr!=null){
+            System.out.print(curr.data +" ");
+            curr = curr.next;
+        }
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		 Stack obj
+            = new Stack();
+        obj.push(11);
+        obj.push(22);
+        obj.push(33);
+        obj.push(44);
+ 
+        
+       obj.display();
+        System.out.printf("\nTop element is %d\n",
+                          obj.peek());
+ 
+        
+        obj.pop();
+        obj.pop();
+ 
+
+        obj.display();
+ 
+        System.out.printf("\nTop element is %d\n",
+                          obj.peek());
+	}
+}
