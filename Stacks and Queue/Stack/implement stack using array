@@ -1,0 +1,59 @@
+import java.util.*;
+
+//stack class create
+class Stack{
+    int arr[];                           
+    int curr_index;
+    int max_size;
+    Stack(int max_size){                       // Stack creation of fixed size
+        arr = new int[max_size];         //array create of max_size
+        curr_index=-1;                   // we intitalize the curr-index from -1
+        this.max_size = max_size;        
+    }
+    public int size(){
+        return curr_index+1;               // size of filled stack
+    }
+    public boolean empty(){                // is stack is empty??
+        return curr_index==-1;
+    }
+    public void push(int data){              
+      if(size()==max_size){
+          System.out.print("size satck is full, no element is added");
+      }
+      curr_index++;
+      arr[curr_index] = data;
+      
+    }
+    public int pop(){
+        if(empty())return -1;
+        int top = arr[curr_index];
+        curr_index--;
+        return top;
+    }
+    public int peek(){
+        if(empty())return -1;
+        return arr[curr_index];
+    }
+    
+    
+}
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		 Stack obj
+            = new Stack(100);
+        obj.push(11);
+        obj.push(22);
+        obj.push(33);
+        obj.push(44);
+ 
+        System.out.printf("\nTop element is %d\n",
+                          obj.peek());
+        obj.pop();
+        obj.pop();
+ 
+        System.out.printf("\nTop element is %d\n",
+                          obj.peek());
+	}
+}
