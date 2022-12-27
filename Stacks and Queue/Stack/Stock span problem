@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		for(int i=0;i<n;i++){
+		    arr[i] = sc.nextInt();
+		}
+		Stack<Integer> st = new Stack<Integer>(); // we store here index beacuse by using index value we calculate 
+		int ans[] = new int[n];                 // number of days and traverse the values using indexes
+		for(int i=0;i<n;i++){
+		    while(!st.empty()&&arr[st.peek()]<=arr[i]){
+		        st.pop();                   // we pop out the values which are smaller than their next value
+		    }
+		    if(st.empty()){                
+		        ans[i] =i+1;
+		    }
+		    else{
+		        ans[i] =i-st.peek();
+		    }
+		    st.push(i);
+		}
+		System.out.print(Arrays.toString(ans));
+	}
+}
