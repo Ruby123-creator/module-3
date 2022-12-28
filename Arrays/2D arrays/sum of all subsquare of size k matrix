@@ -1,0 +1,65 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);                              
+	   int matrix[][]={ { 1, 1,1,1,1 },                     
+                      { 2,2,2,2,2 },                       
+                      { 3,3,3,3,3 },           
+                      { 4,4,4,4,4 },{5,5,5,5,5} }; 
+        int k = sc.nextInt();              
+        int n = matrix.length;                            // k=2
+       // brute force approach O(n^2*k^2)                 //     0      1      2
+    //   int sum =0;                                        //   3      4      5
+    //     for(int i=0;i<n-k+1;i++){                         //  6      7      8
+    //         for(int j=0;j<n-k+1;j++){                   //     i      j      a      b
+    //             for(int a=i;a<k+i;a++){                 //     0      0      0      0
+    //                 for(int b=j;b<k+j;b++){             //     0      0      0      1
+    //                     sum += matrix[a][b];            //     0      0      1      0
+    //                 }                                   //     0      0      1      1
+    //             }
+    //             System.out.print(sum+" ");              //     0      1      0      0
+    //         }                                          //      0      1      0      1
+    //         System.out.println();                      //      0      1      1      0
+    //     }                                              //      0      1      1      1
+        
+       
+       
+       // optimised approach t.c O(n^2) and s.c O(n^2)
+       int mat[][] = new int[n-k+1][n];
+       for(int j=0;j<n;j++){                                     // 1   1   1   1   1
+           int sum =0;                                           // 2   2   2   2   2
+           for(int i=0;i<k;i++){                                 // 3   3   3   3   3
+               sum += matrix[i][j];                              // 4   4   4   4   4
+           }                                                     // 5   5   5   5   5
+           mat[0][j] = sum;
+           for(int i=1;i<n-k+1;i++){
+               sum +=  matrix[k+i-1][j]-matrix[i-1][j];          // 6   6   6   6   6
+               mat[i][j] = sum;                                  // 9   9   9   9   9  
+           }                                                     // 12  12  12  12  12 
+        }                                                        
+        for (int i=0;i<n-k+1 ;i++ ){                             // 18  18  18
+            for (int j=0;j<n ;j++ ){                             // 27  27  27
+                System.out.print(mat[i][j]+" ");                 // 36  36  36
+            } 
+            System.out.println();
+        } 
+       for(int i=0;i<n-k+1;i++){
+           int sum =0;
+           for(int j=0;j<k;j++){
+               sum += mat[i][j];
+               
+           }
+           System.out.print(sum +" ");
+           for(int j=1;j<n-k+1;j++){
+               sum += mat[i][k+j-1]-mat[i][j-1];
+               System.out.print(sum +" ");
+           }
+           System.out.println();
+       }
+       
+	}
+}
+    
