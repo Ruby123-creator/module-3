@@ -1,0 +1,59 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);                                   //left dir                   //right dir
+		int arr[][] = { { 1, 2, 3, 4 },                     //top dir:            1(00)     2(01)     3(02)     4(03) 
+                      { 5, 6, 7, 8 },                       //                5(10)     6(11)     7(12)     8(13)
+                      { 1, 2, 3, 4 },                       //                1(20)     2(21)     3(22)     4(23) 
+                      { 5, 6, 7, 8 } };                     //bottom dirc:    5(30)     6(31)     7(32)     8(33)
+                      
+        int m = arr.length;  
+        int n = arr[0].length;
+        ArrayList<Integer> ans = new ArrayList<>();
+        int left = 0;
+        int right = n-1;
+        int top =0;
+        int bottom = m-1;
+        int dir=0;
+        while(top<=bottom && left<=right){
+            if(dir==0){
+            for(int i=left;i<=right;i++){
+                ans.add(arr[top][i]);
+                
+            }
+            top++;
+            dir=1;
+            }
+            if(dir==1){
+             for(int i=top;i<=bottom;i++){
+                ans.add(arr[i][right]);
+               
+            }
+             right--;
+             dir=2;
+            }
+            if(dir==2){
+             for(int i=right;i>=left;i--){
+                ans.add(arr[bottom][i]);
+               
+            }
+             bottom--;
+             dir=3;
+            }
+            if(dir==3){
+             for(int i=bottom;i>=top;i--){
+                ans.add(arr[i][left]);
+                
+            }
+            left++;
+            dir=0;
+            }
+        }
+     System.out.print(ans);   
+        
+	}
+}
+    
