@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		for(int i=0;i<n;i++){
+		    arr[i] = sc.nextInt();           // first we shift all non-ones number to left and at last fill count1
+		}
+		int count1=0;
+		for(int i=0;i<n;i++){
+		    if(arr[i]!=1){                        // 1    2    0    1    5    0    3    4    0
+		        arr[count1] = arr[i];             // 2    0    5    0    3    4    0    1    1
+		        count1++;                        // m = 6
+		    }                                    // j=0
+		}                                        // j=6 
+		System.out.println(count1);              // 2    0     5     2   5    3    4    1    1
+		int m = count1-1;
+		while(count1<n){
+		    arr[count1++]=1;                    // 0     0     0     2   5    3    4    1    1
+		}
+		int j=0;
+		System.out.println(Arrays.toString(arr));//now we shit all non-zeroes number to right and fill remaining starting index with zero
+		for(int i=m;i>=0;i--){
+		   if(j==0)j=i;
+		    if(arr[i]!=0){
+		  
+		        arr[j--]=arr[i];
+		        
+		    }
+		    
+		}
+		while(j>=0){
+		        arr[j--]=0;
+		    }
+		System.out.print(Arrays.toString(arr));
+	}
+}
