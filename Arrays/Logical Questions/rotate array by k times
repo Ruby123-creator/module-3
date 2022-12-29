@@ -1,0 +1,65 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		Scanner sc = new Scanner(System.in);
+		int arr[] = {1,2,3,4,5,6,7};
+		int k = sc.nextInt();
+		int n = arr.length;
+		
+		
+		//using shifting method
+// 		int ans[] = new int[n];
+// 		int j =0;
+// 		for(int i=k+1;i<n;i++){
+// 		    ans[j] = arr[i];
+// 		    j++;
+// 		}
+// 		for(int i=0;i<=k;i++){
+// 		    ans[j] = arr[i];
+// 		    j++;
+// 		}
+
+
+
+       // using rotating method
+    //   while(k>=1){
+    //       int temp = arr[n-1];
+    //       for(int i=n-2;i>=0;i--){
+    //           arr[i+1] = arr[i];
+    //       }
+    //       arr[0] = temp;
+    //       k--;
+    //   }
+    
+    
+    
+    
+    //using remainder method
+    // int ans[] = new int[n];
+    //     for(int i=0;i<n;i++){
+    //         if(n>=k)
+    //         ans[i] = nums[(n-k+i)%n];
+    //         else{
+    //             k = k%n;
+    //             ans[i] = nums[(n-k+i)%n];
+    //         }
+    //     }
+    //     for(int i=0;i<n;i++){
+    //         nums[i] = ans[i];
+    //     }
+    
+    //using reverse method
+        // k%=n;
+        // if(k == 0) return;
+        // k = n - k;
+        // //write the reverse function
+        // reverse(arr,0,k-1);
+        // reverse(arr,k,n-1);
+        // reverse(arr,0,n-1);
+    
+		System.out.print(Arrays.toString(arr));
+	}
+}
