@@ -1,0 +1,143 @@
+import java.util.*;
+class Node{
+    int x;
+    Node next;
+    Node(int x){
+        this.x = x;
+    }
+}
+class LinkedList{
+    Node head;
+    //to find the length of the linkedlist
+    public int size(){
+        int count =0;
+        Node curr = head;
+        while(curr!=null){
+            count++;
+            curr = curr.next;
+        }
+        return count;
+    }
+    //to delete the kth node from the linkedlist
+    public void deletenode(int n){
+        if(n>size()){
+            System.out.print(-1);
+            return;
+        }
+        if(n==1){    //to delete the node from the head
+            head = head.next;
+            return;
+        }
+        if(n==size()){  //to delete the node from the tail
+            Node curr = head;
+            while(curr.next.next!=null){
+                curr = curr.next;
+            }
+            curr.next=null;
+            return;
+        }
+        //to delete the kth node
+        Node curr = head;
+        
+        for(int i=1;i<n-1;i++){
+            curr = curr.next;
+        }
+        curr.next = curr.next.next;
+        
+        
+    }
+    //to delete the middle of the linkedlist
+    public void deletemiddle(){
+        Node slow = head;
+        Node prev = null;
+        Node fast = head;
+        while(fast!=null && fast.next!=null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        prev.next = slow.next;
+    }
+    // to add the node at tail of the list
+    public void addAtTail(int data){
+        Node newnode = new Node(data);
+        if(head==null){
+            head = newnode;
+            return;
+        }
+        Node curr = head;
+        while(curr.next!=null){
+            curr = curr.next;
+        }
+        curr.next = newnode;
+    }
+    // to add the node at head of the list
+    public void addAtHead(int data){
+        Node newnode = new Node(data);
+        
+        newnode.next = head;
+        head = newnode;
+    }
+    
+    //to insert node At Kthposition
+    public void insertnodeAtKth(int data ,int pos){
+        Node newnode = new Node(data);
+        Node curr = head;
+        Node next = head.next;
+        for(int i=1;i<pos-1;i++){
+            curr = curr.next;
+            next = next.next;
+        }
+        curr.next = newnode;
+        newnode.next = next;
+        
+    }
+    //print the middle of the LinkedList
+    public int findmiddle(){
+        Node slow = head;
+        Node fast = head;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow.x;
+    }
+    //to print the node of the list
+    public void printlist(){
+        Node curr = head;
+        while(curr!=null){
+            System.out.print(curr.x +" ");
+            curr = curr.next;
+        }
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+	    LinkedList l = new LinkedList();
+	    int n = sc.nextInt();
+	    for(int i=0;i<n;i++){
+	        l.addAtTail(sc.nextInt());
+	    }
+	   
+	   // l.addAtHead(sc.nextInt());
+	   
+	  
+	  
+	  // l.deletenode(sc.nextInt());
+	  
+	  
+	 // l.insertnodeAtKth(sc.nextInt() ,sc.nextInt());
+	 
+	 
+	// System.out.print(l.findmiddle());
+	
+	
+	
+	l.deletemiddle();
+	    l.printlist();
+	   //System.out.println(l.size()); 
+	   
+	}
+}
