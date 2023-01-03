@@ -58,6 +58,20 @@ class LinkedList{
         }
         prev.next = slow.next;
     }
+    //to insert the node at middle of the linkedlist
+    public void insertAtmiddle(int data){
+        Node newnode = new Node(data);
+        Node slow = head;
+        Node prev = null;
+        Node fast = head;
+        while(fast!=null && fast.next!=null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        prev.next = newnode;
+        newnode.next = slow;
+    }
     // to add the node at tail of the list
     public void addAtTail(int data){
         Node newnode = new Node(data);
@@ -135,7 +149,11 @@ public class Main
 	
 	
 	
-	l.deletemiddle();
+    //	l.deletemiddle();
+    
+    
+    
+    l.insertAtmiddle(sc.nextInt());
 	    l.printlist();
 	   //System.out.println(l.size()); 
 	   
