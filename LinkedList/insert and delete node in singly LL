@@ -46,6 +46,31 @@ class LinkedList{
         
         
     }
+    //to delete the kth node from end of the list
+    public void deletefromKthend(int n){
+     if(n>size()){
+            System.out.print(-1);
+            return;
+        }
+        if(n==size()){    //to delete the node from the head
+            head = head.next;
+            return;
+        }
+        if(n==1){  //to delete the node from the tail
+            Node curr = head;
+            while(curr.next.next!=null){
+                curr = curr.next;
+            }
+            curr.next=null;
+            return;
+        } 
+        Node curr = head;
+        for(int i=1;i<size()-n;i++){
+            curr = curr.next;
+        }
+        curr.next = curr.next.next;
+    }
+    
     //to delete the middle of the linkedlist
     public void deletemiddle(){
         Node slow = head;
@@ -153,7 +178,11 @@ public class Main
     
     
     
-    l.insertAtmiddle(sc.nextInt());
+    //l.insertAtmiddle(sc.nextInt());
+    
+    
+    
+    l.deletefromKthend(sc.nextInt());
 	    l.printlist();
 	   //System.out.println(l.size()); 
 	   
