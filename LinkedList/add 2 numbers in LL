@@ -1,0 +1,97 @@
+import java.util.*;
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data = data;
+    }
+}
+class LinkedList{
+    static Node head;
+    public void addAtTail(int data){
+        Node newnode = new Node(data);
+        if(head==null){
+            head = newnode;
+            return;
+        }
+        Node curr = head;
+        while(curr.next!=null){
+            curr = curr.next;
+        }
+        curr.next = newnode;
+        
+    }
+      public Node add(int data){
+    Node newnode = new Node(data);
+    newnode.next = head;
+    head = newnode;
+    return head;
+  }
+     public static void add2(Node h1 , Node h2 , LinkedList ans){
+    int carry =0;
+    while(h1!=null && h2!=null){
+      int val = h1.data+h2.data+carry;
+      carry = val/10;
+      val = val%10;
+      ans.add(val);
+      h1 = h1.next;
+      h2 = h2.next;
+    }
+     while(h1!=null ){
+      int val = h1.data+carry;
+      carry = val/10;
+      val = val%10;
+      ans.add(val);
+      h1 = h1.next;
+    }
+     while(h2!=null ){
+      int val = h2.data+carry;
+      carry = val/10;
+      val = val%10;
+      ans.add(val);
+      h2 = h2.next;
+    }
+    if(carry==1){
+      ans.add(1);
+    }
+  }
+    
+    public void display(Node head){
+        Node curr = head;
+        while(curr!=null){
+            System.out.print(curr.data +" ");
+            curr = curr.next;
+        }
+        System.out.println();
+    }
+}
+public class Main
+
+{
+    public static Node  fun(int num){
+        LinkedList l = new LinkedList();
+        while(num!=0){
+            int rem = num%10;
+            l.addAtTail(rem);
+            num = num/10;
+        }
+        return l.head;
+    }
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	     LinkedList l = new LinkedList();
+	     int x = sc.nextInt();
+	     int y = sc.nextInt();
+	     Node ans1 =  fun(x);
+	      
+	     l.head = null;
+	   Node ans2 = fun(y);
+	   l.head=null;
+	   LinkedList ans = new LinkedList();
+	   
+	   l.add2(ans1 ,ans2 ,ans);
+	     l.display(ans.head);
+	     
+	     
+	}
+}
