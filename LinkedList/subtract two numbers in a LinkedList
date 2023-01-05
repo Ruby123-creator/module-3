@@ -1,0 +1,200 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+ 
+class Node
+{
+  int data;
+  Node next;
+  Node(int data)
+  {
+     this.data=data;
+    this.next=null;
+       }
+}
+class LinkedList
+  {
+    Node head;
+    void addNode(int data)   // insert At Tail rule
+    {
+      Node newNode = new Node(data);
+      if(head == null)
+      {  
+          head = newNode; 
+          return;   
+      }
+      Node current = head;
+ 
+      while(current.next !=null)
+        {
+          current = current.next;
+        }
+      current.next = newNode;
+    }
+     void display(Node head)
+    {
+        while(head !=null)
+        {
+            System.out.print(head.data+" ");
+            head = head.next;
+        }
+    }
+     static boolean borrow;                          // it is a carry where false means =0 ,and true means =1
+	public int getLength(Node node)                  // it is a function to calculate length of list
+	{
+		int size = 0;
+		while (node != null) {
+			node = node.next;
+			size++;
+		}
+		return size;
+	}
+public  Node paddZeros(Node sNode, int diff)
+	{
+		if (sNode == null)
+			return null;
+
+		Node zHead = new Node(0);    // create a node with value 0
+		diff--;                     // decrease the value by one of diff
+		Node temp = zHead;          
+		while ((diff--) != 0) {     // we add zeros node until diff becomes zero
+			temp.next = new Node(0);  // we add all zeroes to the head of the LinkedList
+			temp = temp.next;
+		}
+		temp.next = sNode;
+		return zHead;
+	}
+
+	
+	public  Node subtractLinkedListHelper(Node l1, Node l2)
+	{
+	    
+	    // base case of recursion
+		if(l1==null && l2==null && borrow==false){
+		    return null;
+		}
+
+		Node previous
+			= subtractLinkedListHelper(
+				(l1 != null) ? l1.next
+							: null,
+				(l2 != null) ? l2.next : null);
+
+		int d1 = l1.data;                                    // 1--2--3        0--4--5
+		int d2 = l2.data;                                   //   d1          d2        sub       borrow
+		int sub = 0;                                        //    3          5          0         false 
+                                                            //    d1<d2 (we want 1 carry)  borrow = true
+		/* if you have given the value to                             d1 = 10+3 =13
+		next digit then reduce the d1 by 1 */
+		if (borrow) {
+			d1--;                                // Node1   :   sub = 13-5 = 8
+			borrow = false;                      //   d1 = 2           d2 = 4        borrow =true
+		}                                          //  d1 = 1  ,,  d1<d2    d1 = 1+10 = 11         
+
+		/* If d1 < d2, then borrow the number from      // Node2    :   sub = 11 -4 = 7      borrow true
+		previous digit. Add 10 to d1 and set             
+		borrow = true; */
+		if (d1 < d2) {                                 // d1 = 1    d2 = 0 borrow = true
+		                                               // Node3   :    sub = 0   borrow==false 
+			borrow = true;                              //d1 =0     d2=0   borrow = false   
+			d1 = d1 + 10;                               
+		}                                               // ans = 0--7--8
+
+		/* subtract the digits */
+		sub = d1 - d2;                  
+
+		/* Create a Node with sub value */
+		Node current = new Node(sub);    
+
+		/* Set the Next pointer as Previous */
+		current.next = previous;
+
+		return current;
+	}
+
+	
+	public  Node subtractLinkedList(Node l1, Node l2)
+	{
+		// Base Case.(there is no need to find ans if both ll are empty)
+		if (l1 == null && l2 == null)                   
+			return null;
+
+		// In either of the case, get the lengths
+		// of both Linked list.
+		int len1 = getLength(l1);  // len1  =3
+		int len2 = getLength(l2);  // len2  =2 
+
+		Node lNode = null, sNode = null;  // to store which linkedlist is greater and which is smaller
+
+		Node temp1 = l1;  // to store original ll
+		Node temp2 = l2;
+
+		// If lengths differ, calculate the smaller
+		// Node and padd zeros for smaller Node and
+		// ensure both larger Node and smaller Node
+		// has equal length.
+		if (len1 != len2) {                                        // 3!=2
+			lNode = len1 > len2 ? l1 : l2;                         //lnode =    1-->2-->3
+			sNode = len1 > len2 ? l2 : l1;                         //sNode =        4-->5
+			sNode = paddZeros(sNode, Math.abs(len1 - len2));       //sNode =padzeros(4-->5   1)
+		}                                        // it adds 1 zero on head of the linkedlist
+                                                 // sNode  = 0-->4-->5
+		else {
+			// If both list lengths are equal, then
+			// calculate the larger and smaller list.
+			// If 5-6-7 & 5-6-8 are linked list, then
+			// walk through linked list at last Node
+			// as 7 < 8, larger Node is 5-6-8 and
+			// smaller Node is 5-6-7.
+			while (l1 != null && l2 != null) {
+				if (l1.data != l2.data) {
+					lNode = l1.data > l2.data ? temp1 : temp2;
+					sNode = l1.data > l2.data ? temp2 : temp1;
+					break;
+				}
+				l1 = l1.next;
+				l2 = l2.next;
+			}
+		}
+
+		// After calculating larger and smaller Node,
+		// call subtractLinkedListHelper which returns
+		// the subtracted linked list.
+		borrow = false;                                                // borrow zero
+		return subtractLinkedListHelper(lNode, sNode);                //subtractLinkedListHelper(1-->2-->3 , 4-->5)
+	}
+  }
+ 
+public class Main
+
+{
+    
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+      Scanner sc =new Scanner(System.in);
+      int n= sc.nextInt();                     // n =3    and m=2
+      int m= sc.nextInt();                     // list1 = 1-->2-->3         list2 = 4-->5
+      LinkedList list1 = new LinkedList();
+      for(int i=0;i<n;i++)
+        {
+          int x = sc.nextInt();
+          list1.addNode(x);
+        }
+ 
+        LinkedList list2= new LinkedList();
+         for(int i=0;i<m;i++)
+        {
+          int x = sc.nextInt();
+          list2.addNode(x);
+        }
+ 
+     
+        LinkedList ans = new LinkedList();                  // ans
+         Node temp = ans.subtractLinkedList(list1.head ,list2.head);
+         ans.display(temp);
+         
+ 
+  }      
+}
