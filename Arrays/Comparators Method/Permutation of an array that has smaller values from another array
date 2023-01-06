@@ -1,0 +1,89 @@
+// Java program to find permutation of an
+// array that has smaller values from
+// another array
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class Main{
+
+// Function to print required permutation
+static void anyPermutation(int A[], int B[], int n)
+{
+	
+	// Storing elements and indexes
+	ArrayList<int[]> Ap = new ArrayList<>();                 // int A[] = { 12, 24, 8, 32 };
+	                                                         // int B[] = { 13, 25, 32, 11 };
+	ArrayList<int[]> Bp = new ArrayList<>();
+
+	for(int i = 0; i < n; i++)
+		Ap.add(new int[] { A[i], i });                     //Ap = {{12,0} ,{24,1} ,{8,2} ,{32,3}}
+		System.out.println(Ap);                            //Bp = {{13,0} ,{25,1} ,{32,2} ,{11,3}}
+
+	for(int i = 0; i < n; i++)
+		Bp.add(new int[] { B[i], i });                 
+		System.out.println(Bp);
+
+	// Sorting the Both Ap and Bp
+	Collections.sort(Ap, (x, y) -> {          
+		if (x[0] != y[0])                     
+			return x[0] - y[0];
+			
+		return y[1] - y[1];
+	});
+
+	Collections.sort(Bp, (x, y) -> {
+		if (x[0] != y[0])
+			return x[0] - y[0];
+			
+		return y[1] - y[1];
+	});
+		System.out.println(Bp);
+
+	int i = 0, j = 0;
+	int ans[] = new int[n];
+
+	// Filling the answer array
+	ArrayList<Integer> remain = new ArrayList<>();             //Ap = {{8,2} ,{12,0} ,{24,1} ,{32,3}}
+	while (i < n && j < n)
+	{                                                           //Bp ={{11,3} ,{13,0} ,{25,1} ,{32,2}}
+		
+		// Pair element of A and B                         i       j       ans         remain
+		if (Ap.get(i)[0] > Bp.get(j)[0])               //  0       0                      0
+		{
+			ans[Bp.get(j)[1]] = Ap.get(i)[0];         //   1       0       ans[3]=12
+			i++;
+			j++;                                     //    2       1       ans[0] =24
+		}                                     
+		else                                        //     3       2       ans[1] =32
+		{
+			remain.add(i);
+			i++;
+		}
+	}
+	System.out.println(remain);
+
+	// Fill the remaining elements of answer
+	j = 0;
+	for(i = 0; i < n; ++i)                                //ans[2] = 8
+		if (ans[i] == 0)
+		{
+			ans[i] = Ap.get(remain.get(j))[0];
+			j++;                                      // ans = { 24 , 32  , 8  ,12 }
+		}
+
+	// Output required permutation
+	for(i = 0; i < n; ++i)
+		System.out.print(ans[i] + " ");
+}
+
+public static void main(String[] args)
+{
+	int A[] = { 12, 24, 8, 32 };
+	int B[] = { 13, 25, 32, 11 };
+	int n = A.length;
+
+	anyPermutation(A, B, n);
+}
+}
+
