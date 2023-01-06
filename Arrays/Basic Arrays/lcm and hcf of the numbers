@@ -1,0 +1,53 @@
+import java.util.*;
+public class Main
+{
+    static int gcd(int a, int b) 
+  { 
+    return b == 0? a:gcd(b, a % b);    
+  }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+	  // find the lcm and hcf of two numbers
+	  int a = sc.nextInt();
+	  int b = sc.nextInt();
+	  for(int i = a>b?a:b ;i>=1;i--){
+	      if(i%a==0 && i%b==0){
+	          System.out.println( "lcm of "+a +" and " + b+ " is " + i );
+	          break;
+	      }
+	  }
+	  
+	  for(int i=a<b?a:b;i>=1;i--){
+	      if(a%i==0&&b%i==0){
+	        System.out.println( "hcm of "+a +" and " + b+ " is " + i );
+	          break;  
+	      }
+	  }
+	  
+	  
+	  
+	  
+	  
+	  // hcf ,gcd,gcf are all the same things
+	  // lcm and hcf of n numbers
+	  int n = sc.nextInt();
+	  int arr[] = new int[n];
+	  for(int i=0;i<n;i++){
+	      arr[i] = sc.nextInt();
+	      
+	  }
+	  // we know that a*b = lcm(a,b)*hcf(a,b)
+	  //so we find hcf of an array and then find lcm of an array by using this formula
+	  int ans = arr[0];
+	  for(int i=0;i<n;i++){
+	      ans = gcd(ans ,arr[i]);
+	      
+	  }
+	  System.out.println("hcf of the given numbers is "+ans);
+	  int lcm1 = arr[0];
+	  for(int i=0;i<n;i++){
+	      lcm1 = (lcm1*arr[i])/gcd(lcm1 ,arr[i]);
+	  }
+	  System.out.println("lcm of the given numbers is "+lcm1);
+	}
+}
