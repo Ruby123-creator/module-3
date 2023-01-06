@@ -1,0 +1,43 @@
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class Main{
+     static boolean isprime(int n){
+        
+        if(n==2)return true;    // 2 is even prime number
+        if(n<=1||n%2==0)return false;   // if number is 1 ,-ve 0r n is even then return false
+        for(int i=3;i<=Math.sqrt(n);i+=2){   // i starts from 3 because all number is divible by 1 and we already check for 2
+            if(n%i==0){                     // check until square root of n 
+                return false;               // if any number is divisible by i then return false
+            }
+        }
+        return true;
+    }
+
+public static void main(String[] args)
+
+{
+   
+	Scanner sc = new Scanner(System.in);
+	// to check whether the Number is prime or not
+	int n = sc.nextInt();
+	if(isprime(n)){
+	    System.out.println("Number is prime");
+	}
+	else{
+	    System.out.println("Number is not prime");
+	}
+	// to find the prime numbers between a and b
+ 	int a = sc.nextInt();
+ 	int b = sc.nextInt();
+ 	for(int i=a;i<=b;i++){
+ 	    if(isprime(i)){
+ 	        System.out.print(i +" ");
+ 	    }
+ 	}
+	
+}
+}
+
