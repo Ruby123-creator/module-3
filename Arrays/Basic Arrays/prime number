@@ -37,7 +37,19 @@ public static void main(String[] args)
  	        System.out.print(i +" ");
  	    }
  	}
-	
+ 	// to check whether a number is expressed as the sum of two prime numbers
+ 	 int m = sc.nextInt();
+ 	 int flag =0;
+ 	 for(int i=2;i<=m/2;i++){
+ 	     if(isprime(i)){
+ 	         if(isprime(m-i)){
+ 	             System.out.println(i+" "+ (m-i));
+ 	             flag=1;
+ 	         }
+ 	     }
+ 	 }
+ 	 if(flag==0)
+	System.out.print("given number is not expressed as the sum of two prime numbers");
 }
 }
 
