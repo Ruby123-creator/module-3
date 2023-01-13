@@ -1,0 +1,27 @@
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	   //	System.out.println("Hello World");
+	   
+	   String s = "is2 this1 name4 my3";
+	   String arr[] = s.split(" ");
+	   String arr1[] = new String[arr.length];
+	   for(int i=0;i<arr.length;i++){
+	       int x = arr[i].charAt(arr[i].length()-1)-'0';
+	       StringBuilder p = new StringBuilder();
+	       for(int j=0;j<arr[i].length()-1;j++){
+	            
+	            
+	           p.append(arr[i].charAt(j));
+	       }
+	       arr1[x-1] = p.toString();
+	       
+	   }
+	   for(int i=0;i<arr1.length;i++){
+	       System.out.print(arr1[i]+" ");
+	   }
+	   
+	}
+}
