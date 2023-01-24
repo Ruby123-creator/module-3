@@ -1,0 +1,103 @@
+Avatar was given a string consisting of numeric characters and .. 
+Each number between two .s represent one big number. Avatar had to find the sum of all such numbers but when he found the sum, 
+the answer was not what was expected.He looked closely at the given numbers and realised that they were reversed i.e 123 was written as 321, 
+342 was written as 243 and so on. Avatar is extremely efficient at 
+summing but he doesn't want to sit down and do all the reversing. Help him reverse each number.
+
+
+
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+
+class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        System.out.println(reverseNumber(s));
+        }
+	
+    
+	public static String reverseNumber(String s){
+    
+      
+      
+      
+      // BY using Stack method
+      
+// 		Stack<Character> st = new Stack<>();
+// 		StringBuilder p = new StringBuilder();
+// 		for(int i=0;i<s.length();i++){
+// 			char ch = s.charAt(i);
+// 		    if(ch=='.'){
+// 				while(!st.empty()){
+// 				p.append(st.pop());
+// 				}
+// 				p.append('.');
+// 			}
+// 			else{
+// 				st.push(ch);
+// 			}
+// 		}
+// 		while(!st.empty()){
+// 				p.append(st.pop());
+// 				}
+// 		return p.toString();
+
+
+
+   // by using split method
+   
+   
+//   s = s.replace('.' ,'-');
+//     String arr[] = s.split("-");
+// 		StringBuilder sb = new StringBuilder();
+
+// 		int len = arr.length;
+
+// 		for(int i=0;i<len;i++){
+// 			int size = arr[i].length();
+// 			//int num = arr[i] - '0';
+// 			String str = arr[i];
+// 			while(size>0){
+// 				sb.append(str.charAt(size-1));
+// 				size--;
+// 			}
+// 			sb.append(".");
+			
+// 		}
+
+// 		return sb.toString();
+
+
+
+
+//By using pointer method 
+StringBuilder sb = new StringBuilder();
+		int i=0,j=0,len=s.length();
+		while(i<len){
+			while(i<len&&s.charAt(i)!='.'){
+				i++;
+			}
+		
+			j=i-1;
+
+			while(j>=0&&s.charAt(j)!='.'){
+				sb.append(s.charAt(j));
+				j--;
+			}
+
+			if(i<len)
+				sb.append(".");
+			i++;
+		}
+
+		String ans = sb.toString();
+		return ans;
+
+    } 
+}
