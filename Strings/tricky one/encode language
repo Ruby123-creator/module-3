@@ -1,0 +1,48 @@
+
+You are given an integer K and a string S consisting of lowercase English alphabets. 
+You have to modify the string. To do so, for each alphabet in the string, you decide to move the alphabet K times up in alphabetical order.
+
+In case it exceeds z, it cycles back to a. For example, if K is 2, then a becomes c, while z becomes b.
+
+
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main {
+	static String cipherPol(String s, int k) {
+		
+				                               //string s = xyz
+	                                            // k = 2
+		                                        // ans  => x+2=z  ,y+2 = a  , z+2 = b                                     
+		                                        // char+int = int because integer is dominating 
+		                                        // it works until 97-122 then after that it shows special characters
+			                                   // to go with the round values we use modulus  in case of 
+		                                          // char = z   k =4   =>  122+4 =126>122 
+		                                      //  122-z-k ==> 122-122-4 =-4=>  -4%26 = 4   
+		                                      //  96+4 ==> 100(d)
+		String ans = "";
+		for (int i = 0; i < s.length(); ++i) {
+			int val = s.charAt(i);
+			int dup = k;
+			if (val + k > 122) {
+				k -= (122 - val);
+				k = k % 26;
+				ans += (char)(96 + k);
+			} else {
+				ans += (char)(val + k);
+			}
+			k = dup;
+		}
+		return ans;
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+		int k = sc.nextInt();
+		System.out.println(cipherPol(str, k));
+	}
+}
