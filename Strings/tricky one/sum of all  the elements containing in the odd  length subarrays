@@ -1,0 +1,32 @@
+// find the sum of all  the elements containing in the odd  length subarrays 
+
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	public static int AliceandSubArrays(int[] arr) {
+		// write code here
+		int n = arr.length;
+		int sum =0;                                  // to find number of subarrays containing particular element
+		for(int i=0;i<n;i++){                       //     (i+1)*(n-i)    where n is the length of array and i is the index of the element
+			if(((i+1)*(n-i))%2==0){
+				sum += (((i+1)*(n-i))/2)*arr[i];     // to find the no. of subarrays of odd and even length containing x element
+			}                                        //  1   2    3   4    5
+			else{                                    //  odd length subarray from right  1 , 1-2-3 ,1-2-3-4-5 , 2  , 2-3-4  ,3  , 3-4-5 , 5 ,
+				sum += ((((i+1)*(n-i))/2)+1)*arr[i];//  odd length subarray from left     5-4-3 ,5-4-3-2-1 ,   4-3-2 , 3-2-1 ,                      
+			}                                       //  whenever the no. of subarrays is even then to find the length of odd subarrays (i+1)*(n-i)/2                       
+		}                                           //   whenever the no. of subarrays is odd then to find the length of odd subarrays (i+1)*((n-i)/2 +1)
+		return sum;
+    }
+	
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n;
+        n = sc.nextInt();
+        int arr[] = new int[n];
+        for(int i=0;i<n;i++)
+            arr[i] = sc.nextInt();
+        System.out.print(AliceandSubArrays(arr));
+    }
+}
