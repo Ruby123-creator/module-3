@@ -1,0 +1,47 @@
+import java.util.*;
+
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    String s = scan.nextLine();
+    System.out.println(solve(s));                  // This means a letter at index i goes back i spaces in the alphabetic order. 
+                                                 //The alphabets wraps around as well. This means a-2 equals to y
+  }                                                    //     gjbvdkppAGWD
+                                                      //    g   j      b   v     d    k   p   p      A      G    W   D
+	public static String solve(String s) { //index          0   1      2   3     4    5   6   7      8      9   10  11
+        //write code here                  //ascii value   103  106   98  118  100   107  112 112   65      71  87  68
+		int len = s.length();              //ascii-index   103  105   96  115   96   102  102 101   57      62  77  57 
+		char arr[] = new char[len];        //  values       g    i    1    s    3     f    f   e   65-A=0   6   M    3          
+		for(int i=0;i<len;i++)              //                        z         z                   Z-7=S   Z-2=X     Z-7=S
+			arr[i]=s.charAt(i);
+
+		for(int i=0;i<len;i++){
+			char ch = s.charAt(i);
+			if(ch>='A'&&ch<='Z'){
+				if((ch-i)<65){
+					int num = ch-'A';
+					int count = Math.abs(num-i+1);
+					char c = (char)('Z'-count);
+					arr[i] = c;
+				}
+				else
+					arr[i] = (char)(ch-i);
+			}
+			else{
+				if((ch-i)<97){
+					int num = ch-'a';
+					int count = Math.abs(num-i+1);
+					char c = (char)('z'-count);
+					arr[i] = c;
+				}
+				else
+					arr[i] = (char)(ch-i);
+			}
+		}
+
+		String ans = new String(arr);
+		return ans;
+    }
+    
+}
